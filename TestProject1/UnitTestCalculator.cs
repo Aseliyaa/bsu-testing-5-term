@@ -51,7 +51,8 @@ public class Tests
 
         const double tolerance = 1e-200;
 
-        Assert.That(Math.Abs(actualDouble - expected), Is.LessThanOrEqualTo(tolerance));
+
+        Assert.That(Math.Abs(actualDouble/expected-1), Is.LessThanOrEqualTo(tolerance));
     }
 
     [TestCase(" 2 +3 ", 5)]

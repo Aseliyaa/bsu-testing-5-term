@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 //namespace CompiledCode;
 
@@ -99,9 +100,26 @@ public class TokenGoto: Token
     }
 }
 
+public class TokenVar : Token
+{
+    public string name { get; private set; }
+    public VariableDef def { get; private set; }
+
+    public TokenVar(string name, VariableDef def, TokenType type) : base(type)
+    {
+        this.name = name;
+        this.def = def;
+    }
+}
+
 public class CompiledCode
 {
     public readonly IList<Token> tokens = new List<Token>();
+
+    public void AddGlodalVarValue(string name, VariableDef def)
+    {
+        this.tokens.Add(new TokenVar(name,def,TokenType.ValueGlobalVar));
+    }
 
     public void AddGoto(int toToken)
     {

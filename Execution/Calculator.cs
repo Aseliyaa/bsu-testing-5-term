@@ -65,6 +65,11 @@ public class Calculator
                 suspect = (token as TokenOperation).Operation;
             }
 
+            if(token.Type == TokenType.ValueGlobalVar)
+            {
+                
+            }
+
             if (suspect == "(")
             {
                 operators.Push(suspect);

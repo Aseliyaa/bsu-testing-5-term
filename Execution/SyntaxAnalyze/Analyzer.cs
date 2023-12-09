@@ -565,9 +565,9 @@ public class Analyzer
         }
         else
         {
-            return false;
+                        return false;
         }
-        return true;
+          return true;
     }
 
     private bool ParseOperation() // Binary
@@ -661,7 +661,8 @@ public class Analyzer
         {
             if (isDouble)
             {
-                if (double.TryParse(str, out double doubleVal))
+                if (double.TryParse(str, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out double doubleVal))
                     CompiledCode.AddDouble(doubleVal);
                 else
                 {
@@ -699,14 +700,18 @@ public class Analyzer
             {
                 StopOnError("qqqError"); return false;
             }
-
+            
             return true;
         }
 
-        if (GetVar(name, _funcName) == null)
+        var def = GetVar(name, _funcName);
+
+        if ( def == null)
         {
-            StopOnError("qqqError"); return false;
+            StopOnError("Undefinded variable: {"+name+"}"); return false;
         }
+
+        CompiledCode.AddGlodalVarValue(name, def);
 
         return true;
     }
