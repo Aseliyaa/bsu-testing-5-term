@@ -565,9 +565,9 @@ public class Analyzer
         }
         else
         {
-                        return false;
+            return false;
         }
-          return true;
+        return true;
     }
 
     private bool ParseOperation() // Binary
